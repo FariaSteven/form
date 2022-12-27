@@ -1,0 +1,33 @@
+.stepContainer {
+  padding: 10px 20px;
+}
+
+.stepperContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.stepperNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+  background-color: greenyellow;
+  z-index: 1;
+}
+
+.stepperTitle {
+  background-color: blueviolet;
+  color: #fff;
+  font-weight: 500;
+  padding: 5px 5px 5px 20px;
+  margin-left: -15px;
+  width: 100%;
+  border-radius: 20px;
+}

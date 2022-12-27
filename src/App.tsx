@@ -1,11 +1,10 @@
-import './styles/global.css'
+import SignUp from "./pages/signUp/SignUp";
+import "./styles/global.css";
 
-function App() {  
+function App() {
   return (
-    <div>
-      a
-    </div>
-  )
+    <SignUp/>
+  );
 }
 
-export default App
+export default App;
