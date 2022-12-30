@@ -1,4 +1,4 @@
- import "./step.css";
+import * as S from './Step.style'
 
 interface StepConfig {
   children?: any;
@@ -8,13 +8,13 @@ interface StepConfig {
 
 const Step = ({ children, step, title }: StepConfig) => {
   return (
-    <div className="stepContainer">
-      <div className="stepperContainer">
-        <div className="stepperNumber">{step}</div>
-        <div className="stepperTitle">{title}</div>
-      </div>
+    <S.StepWrapper>
+      <S.StepperWrapper>
+        <S.StepperNumber>{step}</S.StepperNumber>
+        <S.StepperTitle>{title}</S.StepperTitle>
+      </S.StepperWrapper>
       {children}
-    </div>
+    </S.StepWrapper>
   );
 };
 

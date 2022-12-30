@@ -1,14 +1,16 @@
-.stepContainer {
-  padding: 10px 20px;
-}
+import styled from "styled-components";
 
-.stepperContainer {
+export const StepWrapper = styled.div`
+  padding: 10px 20px;
+`;
+
+export const StepperWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-}
+`;
 
-.stepperNumber {
+export const StepperNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,9 +22,9 @@
   color: #fff;
   background-color: greenyellow;
   z-index: 1;
-}
+`;
 
-.stepperTitle {
+export const StepperTitle = styled.div`
   background-color: blueviolet;
   color: #fff;
   font-weight: 500;
@@ -30,4 +32,4 @@
   margin-left: -15px;
   width: 100%;
   border-radius: 20px;
-}
+`;
