@@ -1,5 +1,5 @@
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, UseFormSetError } from "react-hook-form";
 
 import * as S from "./Forms.style";
 
@@ -11,20 +11,25 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
     formState: { errors },
   } = useForm();
 
+  console.log('ERRORS', errors)
+
   setTitle("Dados Pessoais");
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
       <S.Input placeholder="Nome" {...register("name", { required: true })} />
       {errors.name && <span>Esse campo é obrigatório</span>}
-      <S.Input placeholder="Email" {...register("email", { required: true })} />
+      <S.Input placeholder="Email" type={'email'} {...register("email", { required: true })} />
       {errors.email && <span>Esse campo é obrigatório</span>}
       <S.Input
         type="password"
         placeholder="Senha"
-        {...register("password", { required: true })}
+        {...register("password", { required: true, minLength: {
+          value: 8,
+          message: "Password must have at least 8 characters"
+        } })}
       />
-      {errors.password && <span>Esse campo é obrigatório</span>}
+      {errors.password && <p>{errors.password?.message ? errors.password?.message : 'Esse campo é obrigatório' }</p>}
       <S.Input
         type="password"
         placeholder="Confirmar senha"
