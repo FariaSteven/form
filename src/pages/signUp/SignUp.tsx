@@ -5,7 +5,7 @@ import Plans from "../../components/forms/Plans";
 import Step from "../../components/step/Step";
 
 const SignUp = () => {
-  const [step, setStep]: Number | any = useState(1);
+  const [step, setStep]: Number | any = useState(3);
   const [title, setTitle]: String | any = useState("");
 
   const onSubmit = (data: any) => {

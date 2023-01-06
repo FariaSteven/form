@@ -1,5 +1,5 @@
-import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import React, { useRef } from "react";
+import { useForm } from "react-hook-form";
 
 import * as S from "./Forms.style";
 
@@ -11,26 +11,67 @@ const Account = ({ onSubmit, previousStep, step, setTitle }: any) => {
     formState: { errors },
   } = useForm();
 
-  setTitle("Cadastro");
+  const password = useRef({});
+  password.current = watch("password", "");
+
+  setTitle("Dados cadastrais");
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
-      <S.Input placeholder="Nome" {...register("name", { required: true })} />
-      {errors.name && <span>Esse campo é obrigatório</span>}
-      <S.Input placeholder="Email" {...register("email", { required: true })} />
-      {errors.email && <span>Esse campo é obrigatório</span>}
-      <S.Input
-        type="password"
-        placeholder="Senha"
-        {...register("password", { required: true })}
-      />
-      {errors.password && <span>Esse campo é obrigatório</span>}
-      <S.Input
-        type="password"
-        placeholder="Confirmar senha"
-        {...register("confirmPassword", { required: true })}
-      />
-      {errors.confirmPassword && <span>Esse campo é obrigatório</span>}
+      <S.Label>
+        Email*
+        <S.Input
+          placeholder="Email*"
+          type={"email"}
+          errors={errors.email}
+          {...register("email", { required: true })}
+        />
+      </S.Label>
+      {errors.email && <S.InputError>Esse campo é obrigatório</S.InputError>}
+      <S.Label>
+        Senha*
+        <S.Input
+          placeholder="Senha"
+          type="password"
+          errors={errors.password}
+          {...register("password", {
+            required: true,
+            minLength: {
+              value: 8,
+              message: "Senha deve ter pelo menos 8 caractéres.",
+            },
+          })}
+        />
+      </S.Label>
+
+      {errors.password && (
+        <S.InputError>
+          {errors.password?.message
+            ? errors.password?.message
+            : "Esse campo é obrigatório"}
+        </S.InputError>
+      )}
+      <S.Label>
+        Confirmar senha*
+        <S.Input
+          placeholder="Confirmar senha"
+          type="password"
+          errors={errors.confirmPassword}
+          {...register("confirmPassword", {
+            required: true,
+            validate: (value) =>
+              value === password.current || "As senhas não coincidem.",
+          })}
+        />
+      </S.Label>
+
+      {errors.confirmPassword && (
+        <S.InputError>
+          {errors.confirmPassword?.message
+            ? errors.confirmPassword?.message
+            : "Esse campo é obrigatório"}
+        </S.InputError>
+      )}
       <S.ButtonsWrapper>
         <S.Button
           disabled={step > 1 ? false : true}

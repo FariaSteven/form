@@ -6,6 +6,7 @@ export const StepWrapper = styled.div`
 
 export const StepperWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
 `;
@@ -14,22 +15,24 @@ export const StepperNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 100px;
+  margin-bottom: 10px;
   height: 50px;
-  border-radius: 50%;
-  font-size: 25px;
-  font-weight: 600;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
-  background-color: greenyellow;
-  z-index: 1;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export const StepperTitle = styled.div`
-  background-color: blueviolet;
-  color: #fff;
-  font-weight: 500;
-  padding: 5px 5px 5px 20px;
-  margin-left: -15px;
-  width: 100%;
-  border-radius: 20px;
+  /* background-color: #f0f8ff;
+      padding: 5px 8px;
+      border: 1px solid #a4d4ff;
+      border-radius: 10px; 
+  */
+  font-size: 20px;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 100;
 `;
