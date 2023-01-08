@@ -1050,7 +1050,7 @@ react-refresh@^0.14.0:
 
 react-select@^5.7.0:
   version "5.7.0"
-  resolved "https://registry.npmjs.org/react-select/-/react-select-5.7.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.7.0.tgz#82921b38f1fcf1471a0b62304da01f2896cd8ce6"
   integrity sha512-lJGiMxCa3cqnUr2Jjtg9YHsaytiZqeNOKeibv6WF5zbK/fPegZ1hg3y/9P1RZVLhqBTs0PfqQLKuAACednYGhQ==
   dependencies:
     "@babel/runtime" "^7.12.0"

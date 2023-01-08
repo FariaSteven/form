@@ -58,71 +58,78 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
       <S.Label>
-      Nome*
-      <S.Input
-        placeholder="Nome"
-        errors={errors.name}
-        {...register("name", { required: true })}
-      /></S.Label>
+        Nome*
+        <S.Input
+          placeholder="Nome"
+          errors={errors.name}
+          {...register("name", { required: true })}
+        />
+      </S.Label>
       {errors.name && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.Label>
-      Celular*
-      <S.Input
-        placeholder="Celular"
-        errors={errors.celphone}
-        onKeyUp={(e) => handleKeyUp(e, "celphone")}
-        {...register("celphone", { required: true })}
-      /></S.Label>
+        Celular*
+        <S.Input
+          placeholder="Celular"
+          errors={errors.celphone}
+          onKeyUp={(e) => handleKeyUp(e, "celphone")}
+          {...register("celphone", { required: true })}
+        />
+      </S.Label>
       {errors.celphone && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.Label>
-      CPF*
-      <S.Input
-        placeholder="CPF"
-        errors={errors.cpf}
-        onKeyUp={(e) => handleKeyUp(e, "cpf")}
-        {...register("cpf", { required: true })}
-      /></S.Label>
+        CPF*
+        <S.Input
+          placeholder="CPF"
+          errors={errors.cpf}
+          onKeyUp={(e) => handleKeyUp(e, "cpf")}
+          {...register("cpf", { required: true })}
+        />
+      </S.Label>
       {errors.name && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.Label>
-      CEP*
-      <S.Input
-        placeholder="CEP"
-        errors={errors.cep}
-        onKeyUp={(e) => handleKeyUp(e, "cep")}
-        {...register("cep", {
-          required: true,
-          onChange: (e) => getAddress(e),
-        })}
-      /></S.Label>
+        CEP*
+        <S.Input
+          placeholder="CEP"
+          errors={errors.cep}
+          onKeyUp={(e) => handleKeyUp(e, "cep")}
+          {...register("cep", {
+            required: true,
+            onChange: (e) => getAddress(e),
+          })}
+        />
+      </S.Label>
       {errors.cep && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.Label>
-      Bairro*
-      <S.Input
-        placeholder="Bairro"
-        errors={errors.neighborhood}
-        value={data?.bairro}
-        {...register("neighborhood", { required: true })}
-      /></S.Label>
+        Bairro*
+        <S.Input
+          placeholder="Bairro"
+          errors={errors.neighborhood}
+          value={data?.bairro}
+          {...register("neighborhood", { required: true })}
+        />
+      </S.Label>
       {errors.neighborhood && (
         <S.InputError>Esse campo é obrigatório</S.InputError>
       )}
       <S.Label>
-      Rua*
-      <S.Input
-        placeholder="Rua"
-        errors={errors.street}
-        value={data?.logradouro}
-        {...register("street", { required: true })}
-      /></S.Label>
+        Rua*
+        <S.Input
+          placeholder="Rua"
+          errors={errors.street}
+          value={data?.logradouro}
+          {...register("street", { required: true })}
+        />
+      </S.Label>
       {errors.street && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.Label>
-      Cidade*
-      <S.Input
-        placeholder="Cidade"
-        errors={errors.city}
-        value={data?.localidade}
-        {...register("city", { required: true })}
-      /></S.Label>
+        Cidade*
+        <S.Input
+          placeholder="Cidade"
+          errors={errors.city}
+          value={data?.localidade}
+          {...register("city", { required: true })}
+        />
+      </S.Label>
       {errors.city && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.ButtonsWrapper>
         <S.Button

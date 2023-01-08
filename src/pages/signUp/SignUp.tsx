@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+
 import Account from "../../components/forms/Account";
 import Personal from "../../components/forms/Personal";
-import Plans from "../../components/forms/Plans";
+import Plans from "../../components/forms/Experience";
 import Step from "../../components/step/Step";
 
 const SignUp = () => {
-  const [step, setStep]: Number | any = useState(3);
+  const [step, setStep]: Number | any = useState(1);
   const [title, setTitle]: String | any = useState("");
 
   const onSubmit = (data: any) => {
     setStep(step + 1);
+    // () => setFormValues(data)
+    
+    console.log('DATA', data)
   };
 
   const previousStep = () => {
     setStep(step - 1);
   };
 
-  const renderStep = () => {
+  const renderStep = useCallback(()=> {
     switch (step) {
       case 2:
         return (
@@ -48,7 +52,7 @@ const SignUp = () => {
           />
         );
     }
-  };
+  }, []) ;
 
   return (
     <Step step={step} title={title}>
