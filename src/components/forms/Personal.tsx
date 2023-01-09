@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import * as S from "./Forms.style";
+import UserContext from "../../context/userContext";
 
 const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
   const {
@@ -13,6 +14,10 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
   } = useForm();
 
   const [data, setData]: any = useState();
+  const [name, setName]: any = useState('');
+  const { setState, state } = useContext(UserContext)
+
+  console.log('a', state.name)
 
   const handleKeyUp = useCallback(
     (e: React.FormEvent<HTMLInputElement>, field: string) => {
@@ -41,6 +46,13 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
     []
   );
 
+  useEffect(()=> {
+    setState({
+      ...state,
+      name: name,
+    })
+  }, [name])
+
   setTitle("Dados pessoais");
 
   const getAddress = useCallback((e: React.FormEvent<HTMLInputElement>) => {
@@ -48,21 +60,23 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
     if (cep?.length === 8) {
       axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
         setData(res.data);
-        console.log(res.data);
       });
-      console.log("aaaa", data);
-      console.log("aaaa", cep);
     }
   }, []);
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+      </div>
       <S.Label>
         Nome*
         <S.Input
           placeholder="Nome"
+          value={state?.name}
           errors={errors.name}
-          {...register("name", { required: true })}
+          {...register("name", { required: true,
+            onChange: (e: any) => setName(e.currentTarget.value)
+          })}
         />
       </S.Label>
       {errors.name && <S.InputError>Esse campo é obrigatório</S.InputError>}

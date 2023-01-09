@@ -1,26 +1,29 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useContext, useEffect } from "react";
+import UserContext from "../../context/userContext";
 
 import Account from "../../components/forms/Account";
 import Personal from "../../components/forms/Personal";
 import Plans from "../../components/forms/Experience";
 import Step from "../../components/step/Step";
 
+
 const SignUp = () => {
   const [step, setStep]: Number | any = useState(1);
   const [title, setTitle]: String | any = useState("");
 
+  const { setState: setGlobalState } = useContext(UserContext);
+
   const onSubmit = (data: any) => {
+    setGlobalState(data)
     setStep(step + 1);
-    // () => setFormValues(data)
-    
-    console.log('DATA', data)
+    console.log("data", data);
   };
 
   const previousStep = () => {
     setStep(step - 1);
   };
 
-  const renderStep = useCallback(()=> {
+  const renderStep = useCallback(() => {
     switch (step) {
       case 2:
         return (
@@ -52,7 +55,7 @@ const SignUp = () => {
           />
         );
     }
-  }, []) ;
+  }, [step]);
 
   return (
     <Step step={step} title={title}>
