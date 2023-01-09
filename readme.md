@@ -7,7 +7,7 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [ ] Integração com Backend
-- [ ] Permanência dos dados quando voltar os passos
+- [ ] Permanência dos dados quando voltar os passos usando context api
 
 ## 💻 Pré-requisitos
 
