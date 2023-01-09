@@ -1,49 +1,32 @@
-Formulário do usuário
+# Beautiful Form
 
-• Definição dos campos obrigatórios
+> Projeto de formulário multi etapas, desenvolvido com o intuito de adquirir e aplicar novas habilidades de forma completa.
 
-• Campos:
-    Text
-    Number
-    TextArea
-    Date
-    Radio
-    Range
-    Checkbox
-  
-• Endereço:
-    Cep
-    Google API
+### Ajustes e melhorias
 
-• Campos especiais:
-    Files upload
-    Image upload
-    Text with multi-select Ajuda no preenchimento 
-    Autopreenchimento
-    Placeholder
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-•Stepper:
-    Salvar a cada step. Ou seja, ao voltar um step já preenchido deve ser possível recuperar os dados.
+- [ ] Integração com Backend
+- [ ] Permanência dos dados quando voltar os passos
 
-• Segurança
-• Acessibilidade
-• Formulário de criação
-• Formulário de edição
-• Abstrair os componentes do formulário para que possa ser possível utilizar o mesmo componente de um formulário de criação e edição. • Tratamento de erros
-• Erros do usuário (ausência ou erro no preenchimento das informações)
-• Erros nas chamadas
+## 💻 Pré-requisitos
 
-== Etapas do projeto
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+* Ter o `NodeJS` em qualquer versão, instalado.
 
-Etapa 1 - Criação do formulário básico no Front-end utilizando:
-Campos de texto, email, senha, TextArea, controle de erros e Stepper. No step 1 deve solicitar apenas algumas informações: nome, email, senha e confirmação de senha, Inclusive deve ter uma regra de negócio para que a senha seja a mesma nós dois campos.
+## 🚀 Instalando Beautiful Form
 
-Etapa 2 - Criação do back-end com: GraphQL, Mongoose e MongoDB. Considerando salvar os dados do primeiro step logo após o preenchimento e os dados dos demais passo somente no final.
+Para instalar o projeto, siga estas etapas:
 
-Etapa 3 - Criação do formulário de edição (usando os mesmos componentes do Front-end)
+Em seu terminal dentro da pasta do projeto execute o comando abaixo para instalar as dependências:
+```
+yarn
+```
 
-Etapa 4 - Testes no front-end com Jest e Cypress 
+## ☕ Executando Beautiful Form
 
-Etapa 5 - Incrementar o formulário, com: possibilidade de recuperar os dados ao voltar para uma etapa anterior do formulário e demais campos não utilizados na etapa 1.
+Em seu terminal dentro da pasta do projeto execute o comando abaixo para executar o projeto:
 
-Etapa 6 - Testes no back-end
+```
+yarn dev
+```
