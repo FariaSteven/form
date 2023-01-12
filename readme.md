@@ -1,32 +1,34 @@
 # 📝 Beautiful Form
 
-> Projeto de formulário multi etapas, desenvolvido com o intuito de adquirir e aplicar novas habilidades de forma completa.
+> Multi-step form developed with the aim of acquiring and applying new skills with forms completely.
 
-### Ajustes e melhorias
+## 💻 Prerequisites
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+Before start, check if you have the requirements to run this project:
 
-- [ ] Integração com Backend
-- [ ] Permanência dos dados quando voltar os passos usando context api
+- `NodeJS` installed.
 
-## 💻 Pré-requisitos
+## 🚀 Installing the projects
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
-* Ter o `NodeJS` em qualquer versão, instalado.
+To install this project, follow the steps below:
 
-## 🚀 Instalando Beautiful Form
-
-Para instalar o projeto, siga estas etapas:
-
-Em seu terminal dentro da pasta do projeto execute o comando abaixo para instalar as dependências:
+In your terminal, inside the project folder, run the command below to install the dependencies:
 ```
 yarn
 ```
 
-## ☕ Executando Beautiful Form
+## ☕ Running the project
 
-Em seu terminal dentro da pasta do projeto execute o comando abaixo para executar o projeto:
+In your terminal, inside the project folder, run the command below to run the project:
 
 ```
-yarn dev
+yarn start
 ```
+
+# This project is in development, this are some of the future features:
+
+- [ ] Back-end integration;
+- [ ] Step content data permanence;
+
+
+
