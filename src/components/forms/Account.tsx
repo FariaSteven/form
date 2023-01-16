@@ -3,7 +3,14 @@ import { useForm } from "react-hook-form";
 
 import * as S from "./Forms.style";
 
-const Account = ({ onSubmit, previousStep, step, setTitle }: any) => {
+const Account = ({
+  onSubmit,
+  previousStep,
+  step,
+  setTitle,
+  formData,
+  updateFields,
+}: any) => {
   const {
     register,
     handleSubmit,
@@ -24,7 +31,11 @@ const Account = ({ onSubmit, previousStep, step, setTitle }: any) => {
           placeholder="Email*"
           type={"email"}
           errors={errors.email}
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: true,
+            value: formData.email,
+            onBlur: (e) => updateFields("email", e.currentTarget.value),
+          })}
         />
       </S.Label>
       {errors.email && <S.InputError>Esse campo é obrigatório</S.InputError>}
@@ -36,6 +47,8 @@ const Account = ({ onSubmit, previousStep, step, setTitle }: any) => {
           errors={errors.password}
           {...register("password", {
             required: true,
+            value: formData.password,
+            onBlur: (e) => updateFields("password", e.currentTarget.value),
             minLength: {
               value: 8,
               message: "Senha deve ter pelo menos 8 caractéres.",
@@ -59,6 +72,8 @@ const Account = ({ onSubmit, previousStep, step, setTitle }: any) => {
           errors={errors.confirmPassword}
           {...register("confirmPassword", {
             required: true,
+            value: formData.password,
+            onBlur: (e) => updateFields("password", e.currentTarget.value),
             validate: (value) =>
               value === password.current || "As senhas não coincidem.",
           })}

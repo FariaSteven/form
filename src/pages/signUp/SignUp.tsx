@@ -1,20 +1,43 @@
-import React, { useCallback, useState, useContext, useEffect } from "react";
-import UserContext from "../../context/userContext";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Account from "../../components/forms/Account";
 import Personal from "../../components/forms/Personal";
 import Plans from "../../components/forms/Experience";
 import Step from "../../components/step/Step";
 
-
 const SignUp = () => {
-  const [step, setStep]: Number | any = useState(1);
+  const [step, setStep]: Number | any = useState(3);
   const [title, setTitle]: String | any = useState("");
 
-  const { setState: setGlobalState } = useContext(UserContext);
+  const [formData, setFormData]: any = useState({
+    name: "",
+    celphone: "",
+    cpf: "",
+    cep: "",
+    neighborhood: "",
+    street: "",
+    city: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    languages: {},
+  });
+
+  // const updateFields = (key: any, value: any) => {
+  //   setFormData((prev: any) => {
+  //     console.log("data", formData);
+  //     return { ...prev, [key]: value };
+  //   });
+  // };
+
+  const updateFields = useCallback((key: any, value: any) => {
+    setFormData((prev: any) => {
+      console.log("data", formData);
+      return { ...prev, [key]: value };
+    });
+  }, [formData])
 
   const onSubmit = (data: any) => {
-    setGlobalState(data)
     setStep(step + 1);
     console.log("data", data);
   };
@@ -32,6 +55,9 @@ const SignUp = () => {
             previousStep={previousStep}
             step={step}
             setTitle={setTitle}
+            formData={formData}
+            setFormData={setFormData}
+            updateFields={updateFields}
           />
         );
 
@@ -42,6 +68,9 @@ const SignUp = () => {
             previousStep={previousStep}
             step={step}
             setTitle={setTitle}
+            formData={formData}
+            setFormData={setFormData}
+            updateFields={updateFields}
           />
         );
 
@@ -52,6 +81,9 @@ const SignUp = () => {
             previousStep={previousStep}
             step={step}
             setTitle={setTitle}
+            formData={formData}
+            setFormData={setFormData}
+            updateFields={updateFields}
           />
         );
     }

@@ -1,23 +1,29 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useEffect, useState } from "react";
 import axios from "axios";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import * as S from "./Forms.style";
-import UserContext from "../../context/userContext";
 
-const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
+const Personal = ({
+  onSubmit,
+  previousStep,
+  step,
+  setTitle,
+  formData,
+  updateFields,
+}: any) => {
   const {
     register,
     handleSubmit,
     watch,
+    setFocus,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const [data, setData]: any = useState();
-  const [name, setName]: any = useState('');
-  const { setState, state } = useContext(UserContext)
+  setTitle("Dados pessoais");
 
-  console.log('a', state.name)
+  const [data, setData]: any = useState();
 
   const handleKeyUp = useCallback(
     (e: React.FormEvent<HTMLInputElement>, field: string) => {
@@ -46,36 +52,34 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
     []
   );
 
-  useEffect(()=> {
-    setState({
-      ...state,
-      name: name,
-    })
-  }, [name])
-
-  setTitle("Dados pessoais");
-
   const getAddress = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     let cep = e.currentTarget.value;
     if (cep?.length === 8) {
       axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
+        console.log(res);
         setData(res.data);
+        setValue("neighborhood", res.data.bairro);
+        setValue("street", res.data.logradouro);
+        setValue("city", res.data.localidade);
+        setFocus("neighborhood", { shouldSelect: true })
+        setFocus("street", { shouldSelect: true })
+        setFocus("city", { shouldSelect: true })
       });
     }
   }, []);
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-      </div>
       <S.Label>
         Nome*
         <S.Input
           placeholder="Nome"
-          value={state?.name}
           errors={errors.name}
-          {...register("name", { required: true,
-            onChange: (e: any) => setName(e.currentTarget.value)
+          autoFocus
+          {...register("name", {
+            required: true,
+            value: formData.name,
+            onBlur: (e) => updateFields("name", e.currentTarget.value),
           })}
         />
       </S.Label>
@@ -86,7 +90,11 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
           placeholder="Celular"
           errors={errors.celphone}
           onKeyUp={(e) => handleKeyUp(e, "celphone")}
-          {...register("celphone", { required: true })}
+          {...register("celphone", {
+            required: true,
+            value: formData.celphone,
+            onBlur: (e) => updateFields("celphone", e.currentTarget.value),
+          })}
         />
       </S.Label>
       {errors.celphone && <S.InputError>Esse campo é obrigatório</S.InputError>}
@@ -95,20 +103,30 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
         <S.Input
           placeholder="CPF"
           errors={errors.cpf}
+          autoFocus
           onKeyUp={(e) => handleKeyUp(e, "cpf")}
-          {...register("cpf", { required: true })}
+          {...register("cpf", {
+            required: true,
+            value: formData.cpf,
+            onBlur: (e) => updateFields("cpf", e.currentTarget.value),
+          })}
         />
       </S.Label>
-      {errors.name && <S.InputError>Esse campo é obrigatório</S.InputError>}
+      {errors.cpf && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.Label>
         CEP*
         <S.Input
           placeholder="CEP"
           errors={errors.cep}
+          autoFocus
           onKeyUp={(e) => handleKeyUp(e, "cep")}
           {...register("cep", {
             required: true,
-            onChange: (e) => getAddress(e),
+            onChange: (e) => {
+              getAddress(e);
+            },
+            value: formData.cep,
+            onBlur: (e) => updateFields("cep", e.currentTarget.value),
           })}
         />
       </S.Label>
@@ -117,9 +135,13 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
         Bairro*
         <S.Input
           placeholder="Bairro"
-          errors={errors.neighborhood}
-          value={data?.bairro}
-          {...register("neighborhood", { required: true })}
+          errors={errors.cep}
+          autoFocus
+          {...register("neighborhood", {
+            required: true,
+            value: formData.neighborhood,
+            onBlur: (e) => updateFields("neighborhood", e.currentTarget.value),
+          })}
         />
       </S.Label>
       {errors.neighborhood && (
@@ -130,8 +152,12 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
         <S.Input
           placeholder="Rua"
           errors={errors.street}
-          value={data?.logradouro}
-          {...register("street", { required: true })}
+          autoFocus
+          {...register("street", {
+            required: true,
+            value: formData.street,
+            onBlur: (e) => updateFields("street", e.currentTarget.value),
+          })}
         />
       </S.Label>
       {errors.street && <S.InputError>Esse campo é obrigatório</S.InputError>}
@@ -140,8 +166,11 @@ const Personal = ({ onSubmit, previousStep, step, setTitle }: any) => {
         <S.Input
           placeholder="Cidade"
           errors={errors.city}
-          value={data?.localidade}
-          {...register("city", { required: true })}
+          {...register("city", {
+            required: true,
+            value: formData.city,
+            onBlur: (e) => updateFields("city", e.currentTarget.value),
+          })}
         />
       </S.Label>
       {errors.city && <S.InputError>Esse campo é obrigatório</S.InputError>}

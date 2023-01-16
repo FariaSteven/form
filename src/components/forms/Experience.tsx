@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
-import makeAnimated from "react-select/animated";
 
 import * as S from "./Forms.style";
 
-const animatedComponents = makeAnimated();
-
-const Experience = ({ onSubmit, previousStep, step, setTitle }: any) => {
+const Experience = ({
+  onSubmit,
+  previousStep,
+  step,
+  setTitle,
+  formData,
+  updateFields,
+}: any) => {
   const {
     register,
     handleSubmit,
     watch,
     control,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const [option, setOption] = useState();
-
-  useEffect(() => {
-    option;
-  }, [option]);
+  const [selectedOption, setOption] = useState([])
 
   setTitle("Experiência");
 
@@ -30,35 +31,42 @@ const Experience = ({ onSubmit, previousStep, step, setTitle }: any) => {
     { value: "mongodb", label: "MongoDB" },
   ];
 
+  useEffect(() => {
+    setValue("languages", selectedOption)
+    if(formData?.languages[0]) {
+      console.log(formData?.languages?.map((item: any) => item))
+      setValue("languages", formData?.languages?.map((item: any) => item))
+    }
+  }, [selectedOption])
+
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
-      <S.Label>
-        Nome*
-        <S.Input
-          placeholder="Nome"
-          errors={errors.name}
-          {...register("name", { required: true })}
-        />
-      </S.Label>
-      {errors.name && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <Controller
-        name="skills"
+        name="languages"
         control={control}
         rules={{ required: true }}
-        render={({ field: { onChange, onBlur, value, name, ref } }) => (
+        render={({ field: { value, name, ref } }) => (
           <Select
             options={options}
-            onChange={onChange}
             isMulti={true}
-            onBlur={onBlur}
-            value={value}
+            onBlur={() => {
+              updateFields("languages", value);
+            }}
+            // defaultValue={formData?.languages?.map((item: any) => {return item?.value})}
+            // defaultValue={
+            //   formData?.languages?.map((item: any) => item.value)
+            // }
+            onChange={(e) => setOption(e)}
+            value={!formData?.languages[0] ? selectedOption : formData?.languages?.map((item: any) => item)}
             name={name}
             ref={ref}
           />
         )}
       />
 
-      {errors.skills && <S.InputError>Esse campo é obrigatório</S.InputError>}
+      {errors.languages && (
+        <S.InputError>Esse campo é obrigatório</S.InputError>
+      )}
       <S.ButtonsWrapper>
         <S.Button
           disabled={step > 1 ? false : true}
