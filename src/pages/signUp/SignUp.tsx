@@ -20,26 +20,17 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    languages: {},
+    languages: [],
   });
-
-  // const updateFields = (key: any, value: any) => {
-  //   setFormData((prev: any) => {
-  //     console.log("data", formData);
-  //     return { ...prev, [key]: value };
-  //   });
-  // };
 
   const updateFields = useCallback((key: any, value: any) => {
     setFormData((prev: any) => {
-      console.log("data", formData);
       return { ...prev, [key]: value };
     });
   }, [formData])
 
   const onSubmit = (data: any) => {
     setStep(step + 1);
-    console.log("data", data);
   };
 
   const previousStep = () => {

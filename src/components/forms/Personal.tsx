@@ -56,7 +56,6 @@ const Personal = ({
     let cep = e.currentTarget.value;
     if (cep?.length === 8) {
       axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
-        console.log(res);
         setData(res.data);
         setValue("neighborhood", res.data.bairro);
         setValue("street", res.data.logradouro);

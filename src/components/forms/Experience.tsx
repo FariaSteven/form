@@ -21,7 +21,7 @@ const Experience = ({
     formState: { errors },
   } = useForm();
 
-  const [selectedOption, setOption] = useState([])
+  const [selectedOption, setOption] = useState(formData?.languages);
 
   setTitle("Experiência");
 
@@ -32,32 +32,23 @@ const Experience = ({
   ];
 
   useEffect(() => {
-    setValue("languages", selectedOption)
-    if(formData?.languages[0]) {
-      console.log(formData?.languages?.map((item: any) => item))
-      setValue("languages", formData?.languages?.map((item: any) => item))
-    }
-  }, [selectedOption])
+    setValue("languages", selectedOption);
+  }, [selectedOption]);
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name="languages"
         control={control}
+        name="languages"
         rules={{ required: true }}
-        render={({ field: { value, name, ref } }) => (
+        render={({ field: { onChange, onBlur, value, name, ref } }) => (
           <Select
             options={options}
+            onChange={onChange}
             isMulti={true}
-            onBlur={() => {
-              updateFields("languages", value);
-            }}
-            // defaultValue={formData?.languages?.map((item: any) => {return item?.value})}
-            // defaultValue={
-            //   formData?.languages?.map((item: any) => item.value)
-            // }
-            onChange={(e) => setOption(e)}
-            value={!formData?.languages[0] ? selectedOption : formData?.languages?.map((item: any) => item)}
+            onBlur={() => updateFields("languages", value)}
+            defaultValue={selectedOption && selectedOption}
+            value={value}
             name={name}
             ref={ref}
           />
