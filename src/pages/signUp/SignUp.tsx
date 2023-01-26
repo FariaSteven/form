@@ -5,12 +5,18 @@ import Personal from "../../components/forms/Personal";
 import Plans from "../../components/forms/Experience";
 import Step from "../../components/step/Step";
 
+import { useQuery } from "@apollo/client/react";
+import { GET_USERS } from '../../gql/Query';
+
 const SignUp = () => {
-  const [step, setStep]: Number | any = useState(3);
+  const [step, setStep]: Number | any = useState(1);
   const [title, setTitle]: String | any = useState("");
 
+  const { loading, error, data } = useQuery(GET_USERS);
+  console.log('data', data)
+
   const [formData, setFormData]: any = useState({
-    name: "",
+    name: data?.users[0]?.name,
     celphone: "",
     cpf: "",
     cep: "",
