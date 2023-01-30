@@ -30,6 +30,8 @@ const Personal = ({
       if (field === "celphone") {
         e.currentTarget.maxLength = 11;
         let value = e.currentTarget.value;
+        setValue("celphone" , value)
+        setFocus("celphone", { shouldSelect: true })
         value = value.replace(/\D/g, "");
         value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1)$2-$3");
         e.currentTarget.value = value;
@@ -37,6 +39,8 @@ const Personal = ({
       if (field === "cep") {
         e.currentTarget.maxLength = 9;
         let value = e.currentTarget.value;
+        setValue("cep" , value)
+        setFocus("cep", { shouldSelect: true })
         value = value.replace(/\D/g, "");
         value = value.replace(/^(\d{5})(\d{3})/, "$1-$2");
         e.currentTarget.value = value;
@@ -72,6 +76,7 @@ const Personal = ({
       <S.Label>
         Nome*
         <S.Input
+          autoComplete="off"
           placeholder="Nome"
           errors={errors.name}
           autoFocus
@@ -88,6 +93,7 @@ const Personal = ({
         <S.Input
           placeholder="Celular"
           errors={errors.celphone}
+          autoFocus
           onKeyUp={(e) => handleKeyUp(e, "celphone")}
           {...register("celphone", {
             required: true,

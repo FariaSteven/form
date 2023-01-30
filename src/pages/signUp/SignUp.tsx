@@ -5,18 +5,23 @@ import Personal from "../../components/forms/Personal";
 import Plans from "../../components/forms/Experience";
 import Step from "../../components/step/Step";
 
-import { useQuery } from "@apollo/client/react";
-import { GET_USERS } from '../../gql/Query';
+import { useMutation, useQuery } from "@apollo/client/react";
+import { GET_USERS } from "../../gql/Query";
+import { CREATE_USER } from "../../gql/Mutation";
 
 const SignUp = () => {
   const [step, setStep]: Number | any = useState(1);
   const [title, setTitle]: String | any = useState("");
 
   const { loading, error, data } = useQuery(GET_USERS);
-  console.log('data', data)
+  const [
+    createNewUser,
+    { data: mutationData, loading: mutationLoading, error: mutationError },
+  ] = useMutation(CREATE_USER);
+  // console.log("data", data);
 
   const [formData, setFormData]: any = useState({
-    name: data?.users[0]?.name,
+    name: "",
     celphone: "",
     cpf: "",
     cep: "",
@@ -29,14 +34,36 @@ const SignUp = () => {
     languages: [],
   });
 
-  const updateFields = useCallback((key: any, value: any) => {
-    setFormData((prev: any) => {
-      return { ...prev, [key]: value };
-    });
-  }, [formData])
+  const updateFields = useCallback(
+    (key: any, value: any) => {
+      setFormData((prev: any) => {
+        return { ...prev, [key]: value };
+      });
+      console.log('DATA', formData)
+    },
+    
+    [formData]
+  );
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (key:any, data: any) => {
     setStep(step + 1);
+    if (step === 3) {
+      createNewUser({
+        variables: {
+          name: formData?.name,
+          celphone: formData?.celphone,
+          cpf: formData?.cpf,
+          cep: formData?.cep,
+          neighborhood: formData?.neighborhood,
+          street: formData?.street,
+          city: formData?.city,
+          email: formData?.email,
+          password: formData?.password,
+          confirmPassword: formData?.confirmPassword,
+          languages: formData?.languages,
+        },
+      });
+    }
   };
 
   const previousStep = () => {
@@ -49,6 +76,7 @@ const SignUp = () => {
         return (
           <Account
             onSubmit={onSubmit}
+            // nextStep={nextStep}
             previousStep={previousStep}
             step={step}
             setTitle={setTitle}
@@ -62,6 +90,7 @@ const SignUp = () => {
         return (
           <Plans
             onSubmit={onSubmit}
+            // nextStep={nextStep}
             previousStep={previousStep}
             step={step}
             setTitle={setTitle}
