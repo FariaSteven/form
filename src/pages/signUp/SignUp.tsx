@@ -18,8 +18,8 @@ const SignUp = () => {
     createNewUser,
     { data: mutationData, loading: mutationLoading, error: mutationError },
   ] = useMutation(CREATE_USER);
-  // console.log("data", data);
 
+  const [languages, setLanguages] = useState();
   const [formData, setFormData]: any = useState({
     name: "",
     celphone: "",
@@ -34,20 +34,22 @@ const SignUp = () => {
     languages: [],
   });
 
+  useEffect(() => {
+    setLanguages(formData?.languages);
+  }, [languages, formData]);
+
   const updateFields = useCallback(
     (key: any, value: any) => {
       setFormData((prev: any) => {
         return { ...prev, [key]: value };
       });
-      console.log('DATA', formData)
     },
-    
+
     [formData]
   );
 
-  const onSubmit = (key:any, data: any) => {
-    setStep(step + 1);
-    if (step === 3) {
+  useEffect(() => {
+    if (step === 4) {
       createNewUser({
         variables: {
           name: formData?.name,
@@ -60,10 +62,14 @@ const SignUp = () => {
           email: formData?.email,
           password: formData?.password,
           confirmPassword: formData?.confirmPassword,
-          languages: formData?.languages,
+          languages: languages,
         },
       });
     }
+  }, [step]);
+
+  const onSubmit = (key: any, data: any) => {
+    setStep(step + 1);
   };
 
   const previousStep = () => {

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_USER = gql`
-  mutation createUser(
+  mutation (
     $name: String!
     $celphone: String!
     $cpf: String!
@@ -11,10 +11,7 @@ export const CREATE_USER = gql`
     $city: String!
     $email: String!
     $password: String!
-    $languages: {
-      $value: String!
-      $label: String!
-    }
+    $languages: [LanguagesInput]!
   ) {
     createUser(
       data: {

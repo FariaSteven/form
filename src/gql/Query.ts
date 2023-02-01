@@ -9,7 +9,10 @@ export const GET_USERS = gql`
       city
       cpf
       email
-      languages
+      languages {
+        value
+        label
+      }
       name
       neighborhood
       password

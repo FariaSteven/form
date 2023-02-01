@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 
@@ -18,6 +18,7 @@ const Experience = ({
     watch,
     control,
     setValue,
+    setFocus,
     formState: { errors },
   } = useForm();
 
@@ -46,7 +47,7 @@ const Experience = ({
             options={options}
             onChange={onChange}
             isMulti={true}
-            onBlur={() => updateFields("languages", value)}
+            onBlur={() => {updateFields("languages", value)}}
             defaultValue={selectedOption && selectedOption}
             value={value}
             name={name}

@@ -181,6 +181,7 @@ const Personal = ({
       {errors.city && <S.InputError>Esse campo é obrigatório</S.InputError>}
       <S.ButtonsWrapper>
         <S.Button
+          visible={true}
           disabled={step > 1 ? false : true}
           onClick={(e) => previousStep(e)}
         >

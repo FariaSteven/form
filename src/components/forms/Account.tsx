@@ -89,7 +89,7 @@ const Account = ({
       )}
       <S.ButtonsWrapper>
         <S.Button
-          disabled={step > 1 ? false : true}
+          disabled={ step > 1 ? false : true }
           onClick={(e) => previousStep(e)}
         >
           Voltar

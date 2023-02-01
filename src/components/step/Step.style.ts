@@ -1,7 +1,23 @@
 import styled from "styled-components";
 
 export const StepWrapper = styled.div`
-  padding: 10px 20px;
+  padding: 40px 600px;
+
+  @media (max-width: 1440px) {
+    padding: 40px 400px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 40px 180px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 150px;
+  }
+
+  @media (max-width: 425px) {
+    padding: 30px;
+  }
 `;
 
 export const StepperWrapper = styled.div`
@@ -15,24 +31,19 @@ export const StepperNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid rgba(0, 0, 0, 0.4);
   border-radius: 100px;
   margin-bottom: 10px;
   height: 50px;
   width: 50px;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 20px;
+  color: #00000033;
+  font-size: 35px;
   font-weight: 600;
+  box-shadow: 0px 4px 10px 1px #00000022;
 `;
 
 export const StepperTitle = styled.div`
-  /* background-color: #f0f8ff;
-      padding: 5px 8px;
-      border: 1px solid #a4d4ff;
-      border-radius: 10px; 
-  */
-  font-size: 20px;
-  color: rgba(0, 0, 0, 1);
+  font-weight: 600;
+  font-size: 2rem;
+  color: #00000099;
   font-weight: 100;
 `;
